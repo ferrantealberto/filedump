@@ -118,4 +118,3 @@ class WSP_Messages {
         WSP_Database::log_activity('daily_report', 'Report giornaliero inviato a ' . $email);
     }
 }
---------------------------------------------------------------------------------

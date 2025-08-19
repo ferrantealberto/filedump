@@ -78,4 +78,3 @@ if ($credits == 0) {
 }
 echo "\n=== Database fix completed ===\n";
 echo "Please refresh your WordPress admin page to see the changes.\n";
---------------------------------------------------------------------------------

@@ -94,4 +94,3 @@ if ($last_number) {
     echo "  Nessun numero nel database\n";
 }
 echo "\n=== Test completato ===\n";
---------------------------------------------------------------------------------

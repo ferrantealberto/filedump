@@ -55,4 +55,3 @@ wp_clear_scheduled_hook('wsp_process_emails');
 wp_clear_scheduled_hook('wsp_daily_report');
 // Pulisci cache
 flush_rewrite_rules();
---------------------------------------------------------------------------------

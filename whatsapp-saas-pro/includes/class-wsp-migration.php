@@ -26,4 +26,3 @@ class WSP_Migration {
         WSP_Database::log_activity('migration', 'Database migrato alla versione 3.0.0');
     }
 }
---------------------------------------------------------------------------------

@@ -93,4 +93,3 @@ if ($wpdb->last_error) {
 }
 echo "\n=== Fix completato ===\n";
 echo "Torna alla pagina Campagne e ricarica la pagina.\n";
---------------------------------------------------------------------------------

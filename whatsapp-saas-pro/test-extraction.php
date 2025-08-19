@@ -74,4 +74,3 @@ update_option('wsp_mail2wa_base_url', $base_url);
 echo "  ✅ Impostazioni salvate\n";
 echo "\n=== Test completato ===\n";
 echo "Ora prova di nuovo il pulsante 'Test API Extraction' nell'admin.\n";
---------------------------------------------------------------------------------

@@ -116,4 +116,3 @@ if ($wpdb->last_error) {
 }
 echo "\n=== Fix completed ===\n";
 echo "Please refresh your WordPress admin page and try creating a campaign again.\n";
---------------------------------------------------------------------------------

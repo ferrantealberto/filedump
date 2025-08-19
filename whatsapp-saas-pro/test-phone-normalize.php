@@ -63,4 +63,3 @@ try {
 }
 echo "\n=== Test completato ===\n";
 echo "Se tutti i test sono passati, il webhook dovrebbe funzionare!\n";
---------------------------------------------------------------------------------

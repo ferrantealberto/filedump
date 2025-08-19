@@ -191,4 +191,3 @@ echo "║  2. Ricarica la pagina Campagne                          ║\n";
 echo "║  3. Se hai ancora problemi, vai a:                       ║\n";
 echo "║     WhatsApp SaaS > Impostazioni > Fix Database          ║\n";
 echo "╚═══════════════════════════════════════════════════════════╝\n";
---------------------------------------------------------------------------------
