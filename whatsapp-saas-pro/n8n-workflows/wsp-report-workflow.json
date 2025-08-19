@@ -1,0 +1,302 @@
+{
+  "name": "WSP Report WhatsApp Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wsp-report",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-receiver",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "wsp-report-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"event\"]}}",
+              "value2": "report_requested"
+            }
+          ]
+        }
+      },
+      "id": "check-event",
+      "name": "Check Event Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Estrai i dati dal webhook\nconst data = $input.first().json;\n\n// Prepara il messaggio email per Mail2Wa\nconst emailSubject = `Report WhatsApp - ${data.customer.business_name}`;\nconst emailBody = data.mail2wa.message;\nconst attachmentUrl = data.mail2wa.attachment_url;\n\n// Formato email per Mail2Wa\n// Il destinatario deve essere nel formato: numero@mail2wa.com\nconst recipientEmail = data.customer.whatsapp_number.replace('+', '') + '@mail2wa.com';\n\nreturn {\n  to: recipientEmail,\n  subject: emailSubject,\n  body: emailBody,\n  attachmentUrl: attachmentUrl,\n  customer: data.customer,\n  report: data.report\n};"
+      },
+      "id": "prepare-email",
+      "name": "Prepare Mail2Wa Email",
+      "type": "n8n-nodes-base.functionItem",
+      "typeVersion": 1,
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reports@wapower.it",
+        "toEmail": "={{$json[\"to\"]}}",
+        "subject": "={{$json[\"subject\"]}}",
+        "text": "={{$json[\"body\"]}}",
+        "options": {
+          "attachments": "={{$json[\"attachmentUrl\"]}}"
+        }
+      },
+      "id": "send-email",
+      "name": "Send via Mail2Wa",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 200]
+    },
+    {
+      "parameters": {
+        "url": "={{$json[\"report\"][\"url\"]}}",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "download-report",
+      "name": "Download Report CSV",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Log dell'attività\nconst logData = {\n  timestamp: new Date().toISOString(),\n  event: 'report_sent',\n  customer_id: $input.first().json.customer.id,\n  customer_code: $input.first().json.customer.code,\n  report_type: $input.first().json.report.type,\n  sent_to: $input.first().json.customer.whatsapp_number,\n  status: 'success'\n};\n\nreturn logData;"
+      },
+      "id": "log-activity",
+      "name": "Log Activity",
+      "type": "n8n-nodes-base.functionItem",
+      "typeVersion": 1,
+      "position": [1050, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.WSP_CALLBACK_URL}}/wp-json/wsp/v1/report-callback",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "customer_id",
+              "value": "={{$json[\"customer\"][\"id\"]}}"
+            },
+            {
+              "name": "report_type",
+              "value": "={{$json[\"report\"][\"type\"]}}"
+            },
+            {
+              "name": "status",
+              "value": "sent"
+            },
+            {
+              "name": "sent_at",
+              "value": "={{new Date().toISOString()}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "update-status",
+      "name": "Update Report Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "success"
+            },
+            {
+              "name": "message",
+              "value": "Report inviato con successo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "error"
+            },
+            {
+              "name": "message",
+              "value": "Evento non supportato"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [650, 500]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1450, 300]
+    }
+  ],
+  "connections": {
+    "webhook-receiver": {
+      "main": [
+        [
+          {
+            "node": "check-event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check-event": {
+      "main": [
+        [
+          {
+            "node": "prepare-email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "download-report",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "error-response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prepare-email": {
+      "main": [
+        [
+          {
+            "node": "send-email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send-email": {
+      "main": [
+        [
+          {
+            "node": "log-activity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "download-report": {
+      "main": [
+        [
+          {
+            "node": "update-status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "log-activity": {
+      "main": [
+        [
+          {
+            "node": "success-response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update-status": {
+      "main": [
+        [
+          {
+            "node": "success-response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "success-response": {
+      "main": [
+        [
+          {
+            "node": "respond-webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "error-response": {
+      "main": [
+        [
+          {
+            "node": "respond-webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "WhatsApp",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Reports",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}

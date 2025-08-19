@@ -1,0 +1,452 @@
+/**
+ * WhatsApp SaaS Pro Admin Styles
+ * Version: 3.0.0
+ */
+/* General Styles */
+.wsp-section {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.wsp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+.wsp-stat-card {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+.wsp-stat-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+.wsp-stat-card h3 {
+    margin: 0;
+    font-size: 32px;
+    color: #0073aa;
+    font-weight: 600;
+}
+.wsp-stat-card p {
+    margin: 10px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+/* Test Section Styles */
+.wsp-test-section {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.wsp-test-card {
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+}
+.wsp-result-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.wsp-result-box.success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    display: block;
+}
+.wsp-result-box.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    display: block;
+}
+.wsp-result-box.info {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+    display: block;
+}
+.wsp-result-box.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    display: block;
+}
+.wsp-result-box pre {
+    background: white;
+    padding: 10px;
+    border-radius: 3px;
+    overflow-x: auto;
+    margin: 10px 0;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.wsp-result-box code {
+    background: rgba(0,0,0,0.05);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+}
+/* API Info Table */
+.wsp-api-info {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+.wsp-api-info code {
+    background: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #666;
+}
+/* Buttons */
+.wsp-button-group {
+    margin: 20px 0;
+}
+.wsp-button-group .button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+/* Forms */
+.wsp-form-row {
+    margin-bottom: 15px;
+}
+.wsp-form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #23282d;
+}
+.wsp-form-row input[type="text"],
+.wsp-form-row input[type="email"],
+.wsp-form-row input[type="tel"],
+.wsp-form-row input[type="number"],
+.wsp-form-row input[type="url"],
+.wsp-form-row textarea,
+.wsp-form-row select {
+    width: 100%;
+    max-width: 500px;
+}
+/* Campaign QR */
+.wsp-qr-container {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: inline-block;
+}
+.wsp-qr-container img {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #f0f0f0;
+    border-radius: 8px;
+}
+/* Messages List */
+.wsp-messages-list {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.wsp-message-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+.wsp-message-item:hover {
+    background: #f9f9f9;
+}
+.wsp-message-item:last-child {
+    border-bottom: none;
+}
+.wsp-message-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.wsp-message-status.sent {
+    background: #d4edda;
+    color: #155724;
+}
+.wsp-message-status.failed {
+    background: #f8d7da;
+    color: #721c24;
+}
+.wsp-message-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+/* Loading Spinner */
+.wsp-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0,0,0,.1);
+    border-radius: 50%;
+    border-top-color: #0073aa;
+    animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .wsp-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wsp-form-row input,
+    .wsp-form-row textarea,
+    .wsp-form-row select {
+        max-width: 100%;
+    }
+}
+/* Notices */
+.wsp-notice {
+    padding: 12px;
+    margin: 15px 0;
+    border-left: 4px solid;
+    background: white;
+}
+.wsp-notice.success {
+    border-color: #46b450;
+    background: #ecf7ed;
+}
+.wsp-notice.error {
+    border-color: #dc3232;
+    background: #fbeaea;
+}
+.wsp-notice.warning {
+    border-color: #ffb900;
+    background: #fff8e5;
+}
+.wsp-notice.info {
+    border-color: #00a0d2;
+    background: #e5f5fa;
+}
+/* Table Styles */
+.wsp-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+.wsp-table th {
+    background: #f9f9f9;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    font-weight: 600;
+}
+.wsp-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+.wsp-table tr:hover {
+    background: #f5f5f5;
+}
+/* Badge */
+.wsp-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: #0073aa;
+    color: white;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.wsp-badge.new {
+    background: #46b450;
+}
+.wsp-badge.pro {
+    background: #826eb4;
+}
+/* Settings Page */
+.wsp-settings-notice {
+    background: #e7f3ff;
+    border: 1px solid #0073aa;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 0;
+}
+.wsp-settings-notice p {
+    margin: 5px 0;
+}
+/* Tooltips */
+.wsp-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+.wsp-tooltip .wsp-tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+.wsp-tooltip:hover .wsp-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/* Stili aggiuntivi per pagine complete */
+.wsp-number-actions {
+    display: flex;
+    gap: 5px;
+}
+.wsp-campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+.wsp-campaign-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: white;
+    transition: all 0.3s ease;
+}
+.wsp-campaign-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+.wsp-campaign-qr {
+    text-align: center;
+    margin: 20px 0;
+}
+.wsp-campaign-qr img {
+    max-width: 200px;
+    border: 5px solid #f0f0f0;
+    border-radius: 8px;
+}
+.wsp-credits-balance {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+.wsp-credits-balance h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.wsp-credits-balance .amount {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.wsp-log-entry {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+.wsp-log-entry:hover {
+    background: #f9f9f9;
+}
+.wsp-log-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #e5e5e5;
+}
+.wsp-log-type.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+.wsp-log-type.success {
+    background: #d4edda;
+    color: #155724;
+}
+.wsp-log-type.info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+.wsp-report-chart {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+.wsp-report-chart canvas {
+    max-width: 100%;
+    height: auto;
+}
+.wsp-progress-bar {
+    background: #f0f0f0;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.wsp-progress-bar-fill {
+    background: #0073aa;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+.wsp-quick-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.wsp-quick-actions .button {
+    flex: 0 0 auto;
+}
+/* Stampa */
+@media print {
+    .wsp-no-print {
+        display: none !important;
+    }
+    
+    .wsp-stats-grid {
+        page-break-inside: avoid;
+    }
+    
+    .wsp-section {
+        page-break-inside: avoid;
+    }
+}
+--------------------------------------------------------------------------------
