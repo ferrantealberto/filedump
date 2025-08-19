@@ -117,6 +117,10 @@ class WhatsAppSaasPluginPro {
             if (file_exists(WSP_PLUGIN_DIR . 'admin/class-wsp-admin-saas.php')) {
                 require_once WSP_PLUGIN_DIR . 'admin/class-wsp-admin-saas.php';
             }
+            // Aggiungi test SaaS
+            if (file_exists(WSP_PLUGIN_DIR . 'admin/class-wsp-admin-test-saas.php')) {
+                require_once WSP_PLUGIN_DIR . 'admin/class-wsp-admin-test-saas.php';
+            }
         }
     }
     
@@ -135,6 +139,10 @@ class WhatsAppSaasPluginPro {
         // Admin
         if (is_admin()) {
             new WSP_Admin();
+            // Inizializza test SaaS se la classe esiste
+            if (class_exists('WSP_Admin_Test_SaaS')) {
+                new WSP_Admin_Test_SaaS();
+            }
         }
         
         // Inizializza integrazioni

@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 class WSP_Activity_Log {
     
     /**
-     * Log di un'attività
+     * Log di un'attività semplificato
      */
     public static function log($type, $data = array(), $customer_id = null) {
         global $wpdb;
