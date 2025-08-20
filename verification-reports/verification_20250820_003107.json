@@ -1,0 +1,49 @@
+{
+  "timestamp": "2025-08-20T00:31:07.344481",
+  "plugin_dir": "/home/user/webapp/whatsapp-saas-pro-clean",
+  "summary": {
+    "successes": 29,
+    "warnings": 1,
+    "issues": 2
+  },
+  "details": {
+    "successes": [
+      "Directory 'admin' exists (2 items)",
+      "Directory 'includes' exists (17 items)",
+      "Directory 'assets' exists (2 items)",
+      "Directory 'templates' exists (0 items)",
+      "Directory 'install' exists (1 items)",
+      "Directory 'n8n-workflows' exists (1 items)",
+      "Found: whatsapp-saas-pro.php (Main plugin file) - 17.7 KB",
+      "Found: includes/class-wsp-database-saas.php (Database management) - 20.3 KB",
+      "Found: includes/class-wsp-customers.php (Customer management) - 16.8 KB",
+      "Found: includes/class-wsp-reports.php (Report generation) - 17.0 KB",
+      "Found: includes/class-wsp-integrations.php (External integrations) - 19.1 KB",
+      "Found: includes/class-wsp-activity-log.php (Activity logging) - 3.6 KB",
+      "Found: includes/class-wsp-loader.php (Compatibility loader) - 9.3 KB",
+      "Found: admin/class-wsp-admin-test-saas.php (Test suite) - 37.5 KB",
+      "Checked 23 PHP files",
+      "Class WhatsAppSaasPluginPro found in whatsapp-saas-pro.php (Main plugin class)",
+      "Class WSP_Database_SaaS found in includes/class-wsp-database-saas.php (Database management)",
+      "Class WSP_Customers found in includes/class-wsp-customers.php (Customer management)",
+      "Class WSP_Reports found in includes/class-wsp-reports.php (Report generation)",
+      "Class WSP_Integrations found in includes/class-wsp-integrations.php (External integrations)",
+      "Class WSP_Activity_Log found in includes/class-wsp-activity-log.php (Activity logging)",
+      "Constant WSP_VERSION is defined",
+      "Constant WSP_MAIL2WA_DEFAULT_API is defined",
+      "Constant WSP_MAIL2WA_DEFAULT_KEY is defined",
+      "Constant WSP_QR_SERVICE_URL is defined",
+      "Constant WSP_REGISTRATION_FORM_URL is defined",
+      "Database schema file found",
+      "Single plugin header in whatsapp-saas-pro.php (no conflicts)",
+      "whatsapp-saas-pro-mt-clean.zip has correct structure"
+    ],
+    "warnings": [
+      "whatsapp-saas-pro-v4.2.0.zip may have incomplete structure"
+    ],
+    "issues": [
+      "Missing: admin/class-wsp-admin-customers.php (Admin customers UI)",
+      "Missing: admin/class-wsp-admin-reports.php (Admin reports UI)"
+    ]
+  }
+}
