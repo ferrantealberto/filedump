@@ -11,7 +11,9 @@ if (!defined('ABSPATH')) {
 }
 
 // Crea classi stub per evitare errori fatali se mancano file
-if (!class_exists('WSP_Database')) {
+// IMPORTANTE: Non creare stub se il file reale esiste
+$database_file = dirname(__FILE__) . '/class-wsp-database.php';
+if (!class_exists('WSP_Database') && !file_exists($database_file)) {
     class WSP_Database {
         public static function create_tables() {
             // Usa la nuova classe SaaS
@@ -22,7 +24,8 @@ if (!class_exists('WSP_Database')) {
     }
 }
 
-if (!class_exists('WSP_Settings')) {
+$settings_file = dirname(__FILE__) . '/class-wsp-settings.php';
+if (!class_exists('WSP_Settings') && !file_exists($settings_file)) {
     class WSP_Settings {
         public static function init() {
             // Placeholder
@@ -38,7 +41,8 @@ if (!class_exists('WSP_Settings')) {
     }
 }
 
-if (!class_exists('WSP_API')) {
+$api_file = dirname(__FILE__) . '/class-wsp-api.php';
+if (!class_exists('WSP_API') && !file_exists($api_file)) {
     class WSP_API {
         public static function handle_webhook() {
             wp_send_json_success('Webhook received');
@@ -54,7 +58,8 @@ if (!class_exists('WSP_API')) {
     }
 }
 
-if (!class_exists('WSP_Mail2Wa')) {
+$mail2wa_file = dirname(__FILE__) . '/class-wsp-mail2wa.php';
+if (!class_exists('WSP_Mail2Wa') && !file_exists($mail2wa_file)) {
     class WSP_Mail2Wa {
         private $api_url;
         private $api_key;
@@ -74,7 +79,8 @@ if (!class_exists('WSP_Mail2Wa')) {
     }
 }
 
-if (!class_exists('WSP_Messages')) {
+$messages_file = dirname(__FILE__) . '/class-wsp-messages.php';
+if (!class_exists('WSP_Messages') && !file_exists($messages_file)) {
     class WSP_Messages {
         public static function ajax_get_recipients() {
             wp_send_json_success(array());
@@ -82,7 +88,8 @@ if (!class_exists('WSP_Messages')) {
     }
 }
 
-if (!class_exists('WSP_Campaigns')) {
+$campaigns_file = dirname(__FILE__) . '/class-wsp-campaigns.php';
+if (!class_exists('WSP_Campaigns') && !file_exists($campaigns_file)) {
     class WSP_Campaigns {
         public static function get_all() {
             return array();
@@ -90,7 +97,8 @@ if (!class_exists('WSP_Campaigns')) {
     }
 }
 
-if (!class_exists('WSP_Gmail')) {
+$gmail_file = dirname(__FILE__) . '/class-wsp-gmail.php';
+if (!class_exists('WSP_Gmail') && !file_exists($gmail_file)) {
     class WSP_Gmail {
         public static function process_emails() {
             // Placeholder
@@ -98,7 +106,8 @@ if (!class_exists('WSP_Gmail')) {
     }
 }
 
-if (!class_exists('WSP_Migration')) {
+$migration_file = dirname(__FILE__) . '/class-wsp-migration.php';
+if (!class_exists('WSP_Migration') && !file_exists($migration_file)) {
     class WSP_Migration {
         public static function run() {
             // Placeholder
@@ -106,7 +115,8 @@ if (!class_exists('WSP_Migration')) {
     }
 }
 
-if (!class_exists('WSP_Test')) {
+$test_file = dirname(__FILE__) . '/class-wsp-test.php';
+if (!class_exists('WSP_Test') && !file_exists($test_file)) {
     class WSP_Test {
         public static function ajax_test_mail2wa() {
             wp_send_json_error('Test non disponibile');
@@ -126,7 +136,8 @@ if (!class_exists('WSP_Test')) {
     }
 }
 
-if (!class_exists('WSP_Sample_Data')) {
+$sample_data_file = dirname(__FILE__) . '/class-wsp-sample-data.php';
+if (!class_exists('WSP_Sample_Data') && !file_exists($sample_data_file)) {
     class WSP_Sample_Data {
         public static function ajax_generate_sample_data() {
             wp_send_json_error('Funzione non disponibile');
@@ -134,7 +145,8 @@ if (!class_exists('WSP_Sample_Data')) {
     }
 }
 
-if (!class_exists('WSP_Admin')) {
+$admin_file = dirname(dirname(__FILE__)) . '/admin/class-wsp-admin.php';
+if (!class_exists('WSP_Admin') && !file_exists($admin_file)) {
     class WSP_Admin {
         public function __construct() {
             add_action('admin_menu', array($this, 'add_admin_menu'));
